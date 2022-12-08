@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :favorited_microposts,
+  :favorite_microposts]
   
   def index
     @pagy, @users = pagy(User.order(id: :desc), items: 25)
@@ -39,7 +40,16 @@ class UsersController < ApplicationController
     @pagy, @followers = pagy(@user.followers)
     counts(@user)
   end
+  
+  def favorited_microposts
+    @pagy, @favorited_microposts = pagy(@micropost.favorited_microposts)
+    count(@micropost)
+  end
 
+  def favorite_microposts
+    @pagy, @favorite_microposts = pagy(@user.favorite_microposts)
+    count(@user)
+  end
   
   private
   
