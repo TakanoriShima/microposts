@@ -16,6 +16,5 @@ class ApplicationController < ActionController::Base
     @count_followings = user.followings.count
     @count_followers = user.followers.count
     @count_favorited_microposts = user.favorited_microposts.count
-    @count_favorite_microposts = user.favorite_microposts.count
   end
 end
